@@ -5,6 +5,7 @@ body {
   min-height: 100vh;
   padding: 0;
 }
+
 .dashboard-container {
   max-width: 900px;
   margin: 0 auto;
@@ -129,7 +130,7 @@ body {
   font-weight: 400;
 }
 .expiry-card {
-  background: #0a0d11;
+  background: #27343f;
   color: #1a2a32;
   align-items: center;
   justify-content: center;
@@ -199,7 +200,7 @@ body {
   margin: 6px 0 0 0;
 }
 .stat-card {
-  background: #0a0d11;
+  background: #27343f;
   border-radius: 16px;
   box-shadow: 0 4px 20px 0 rgba(0,0,0,0.15);
   padding: 28px 20px 24px 20px;
@@ -249,7 +250,7 @@ body {
   text-align: center;
 }
 .tabs-section {
-  background: #0a0d11;
+  background: #27343f;
   border-radius: 20px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   width: calc(100% - 48px);
@@ -268,7 +269,7 @@ body {
 }
 .tabs {
   display: flex;
-  background: #0a0d11;
+  background: #27343f;
   border-radius: 16px;
   padding: 4px;
   gap: 4px;
