@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Domain Setup Made Simple</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: #070707;
+        color: #1e293b;
+        min-height: 100vh;
+        padding: 80px 20px 40px 20px;
+      }
+
+      .cloudjet-domain-setup-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .cloudjet-domain-setup-hero {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .cloudjet-domain-setup-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #24a75b 0%, #1f8b4d 100%);
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .cloudjet-domain-setup-badge::before {
+        content: "✓";
+        font-size: 16px;
+        color: white;
+      }
+
+      .cloudjet-domain-setup-title {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #ffffff;
+      }
+
+      .cloudjet-domain-setup-subtitle {
+        font-size: 18px;
+        color: #a1a1aa;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      .cloudjet-domain-setup-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
+        justify-items: center;
+        place-items: center;
+      }
+
+      .cloudjet-domain-setup-card {
+        background: #16191f;
+        border: 1px solid #374151;
+        border-radius: 12px;
+        padding: 24px;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      .cloudjet-domain-setup-card:hover {
+        transform: translateY(-4px);
+        border-color: #24a75b;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      }
+
+      .cloudjet-domain-setup-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: #24a75b;
+      }
+
+      .cloudjet-domain-setup-card-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      .cloudjet-domain-setup-card-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        color: white;
+        box-shadow: 0 0 20px rgba(36, 167, 91, 0.6),
+          0 0 40px rgba(36, 167, 91, 0.3);
+        background: #24a75b;
+      }
+
+      .cloudjet-domain-setup-card-number {
+        background: #24a75b;
+        color: white;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 600;
+        margin-left: auto;
+      }
+
+      .cloudjet-domain-setup-card-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #ffffff;
+      }
+
+      .cloudjet-domain-setup-card-description {
+        color: #a1a1aa;
+        line-height: 1.6;
+        margin-bottom: 16px;
+      }
+
+      .cloudjet-domain-setup-card-example {
+        display: inline-block;
+        background: #1f2937;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        color: #24a75b;
+        border: 1px solid #374151;
+      }
+
+      .cloudjet-domain-setup-panel {
+        background: #16191f;
+        border: 1px solid #374151;
+        border-radius: 12px;
+        padding: 32px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+      }
+
+      .cloudjet-domain-setup-panel-title {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #ffffff;
+      }
+
+      .cloudjet-domain-setup-panel-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        box-shadow: 0 0 15px rgba(36, 167, 91, 0.6),
+          0 0 30px rgba(36, 167, 91, 0.3);
+        background: #24a75b;
+      }
+
+      .cloudjet-domain-setup-benefits {
+        list-style: none;
+        margin-bottom: 20px;
+      }
+
+      .cloudjet-domain-setup-benefit {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 24px;
+        min-height: 84px;
+      }
+
+      .cloudjet-domain-setup-benefit::before {
+        content: "✓";
+        color: white;
+        font-weight: bold;
+        background: #24a75b;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      .cloudjet-domain-setup-benefit-title {
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #ffffff;
+      }
+
+      .cloudjet-domain-setup-benefit-description {
+        color: #a1a1aa;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .cloudjet-domain-setup-steps {
+        list-style: none;
+      }
+
+      .cloudjet-domain-setup-step:not(:last-child) {
+        margin-bottom: 30px;
+      }
+
+      .cloudjet-domain-setup-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        min-height: 84px;
+      }
+
+      .cloudjet-domain-setup-step-number {
+        background: #24a75b;
+        color: white;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        font-weight: 600;
+        flex-shrink: 0;
+      }
+
+      .cloudjet-domain-setup-step-content {
+        flex: 1;
+      }
+
+      .cloudjet-domain-setup-step-title {
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #ffffff;
+      }
+
+      .cloudjet-domain-setup-step-description {
+        color: #a1a1aa;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      .cloudjet-domain-setup-buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin-top: 40px;
+      }
+
+      .cloudjet-domain-setup-button {
+        padding: 14px 28px;
+        border-radius: 25px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 2px solid;
+        font-size: 16px;
+      }
+
+      .cloudjet-domain-setup-button-primary {
+        background: #24a75b;
+        color: white;
+        border-color: #24a75b;
+      }
+
+      .cloudjet-domain-setup-button-primary:hover {
+        background: #1f8b4d;
+        border-color: #1f8b4d;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(36, 167, 91, 0.3);
+      }
+
+      .cloudjet-domain-setup-button-secondary {
+        background: transparent;
+        color: #24a75b;
+        border-color: #24a75b;
+      }
+
+      .cloudjet-domain-setup-button-secondary:hover {
+        background: rgba(36, 167, 91, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(36, 167, 91, 0.2);
+      }
+
+      @media (max-width: 768px) {
+        .cloudjet-domain-setup-title {
+          font-size: 36px;
+        }
+
+        .cloudjet-domain-setup-grid {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .cloudjet-domain-setup-card {
+          width: 100%;
+          max-width: 400px;
+        }
+
+        .cloudjet-domain-setup-panel {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+
+        .cloudjet-domain-setup-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .cloudjet-domain-setup-button {
+          width: 100%;
+          max-width: 300px;
+        }
+      }
+
+      @media (min-width: 769px) and (max-width: 1100px) {
+        .cloudjet-domain-setup-grid {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 24px;
+        }
+
+        .cloudjet-domain-setup-card {
+          flex: 0 0 calc(50% - 12px);
+          max-width: 400px;
+        }
+
+        .cloudjet-domain-setup-card:nth-child(3) {
+          flex: 0 0 100%;
+          max-width: 400px;
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cloudjet-domain-setup-container">
+      <div class="cloudjet-domain-setup-hero">
+        <div class="cloudjet-domain-setup-badge">Domain Setup Made Simple</div>
+        <h1 class="cloudjet-domain-setup-title">Understanding Domains</h1>
+        <p class="cloudjet-domain-setup-subtitle">
+          Don't worry if domains seem confusing. We'll walk you through
+          everything you need to know in simple terms.
+        </p>
+      </div>
+
+      <div class="cloudjet-domain-setup-grid">
+        <div class="cloudjet-domain-setup-card">
+          <div class="cloudjet-domain-setup-card-header">
+            <div class="cloudjet-domain-setup-card-icon">🌐</div>
+            <div class="cloudjet-domain-setup-card-number">1</div>
+          </div>
+          <h3 class="cloudjet-domain-setup-card-title">What's a Domain?</h3>
+          <p class="cloudjet-domain-setup-card-description">
+            Your website's address
+          </p>
+          <p class="cloudjet-domain-setup-card-description">
+            A domain is like your home address, but for the internet. It's how
+            people find and visit your website.
+          </p>
+          <div class="cloudjet-domain-setup-card-example">google.com</div>
+        </div>
+
+        <div class="cloudjet-domain-setup-card">
+          <div class="cloudjet-domain-setup-card-header">
+            <div class="cloudjet-domain-setup-card-icon">→</div>
+            <div class="cloudjet-domain-setup-card-number">2</div>
+          </div>
+          <h3 class="cloudjet-domain-setup-card-title">Easy Registration</h3>
+          <p class="cloudjet-domain-setup-card-description">
+            We handle the setup
+          </p>
+          <p class="cloudjet-domain-setup-card-description">
+            When you order with us, you'll be redirected to Cloudjet Store to
+            get your domain. Simple and straightforward.
+          </p>
+          <div class="cloudjet-domain-setup-card-example">cloudjet.org</div>
+        </div>
+
+        <div class="cloudjet-domain-setup-card">
+          <div class="cloudjet-domain-setup-card-header">
+            <div class="cloudjet-domain-setup-card-icon">⚙</div>
+            <div class="cloudjet-domain-setup-card-number">3</div>
+          </div>
+          <h3 class="cloudjet-domain-setup-card-title">AutoLink™ Magic</h3>
+          <p class="cloudjet-domain-setup-card-description">
+            Zero technical work
+          </p>
+          <p class="cloudjet-domain-setup-card-description">
+            Our AutoLink™ feature automatically connects your domain to your
+            website. No DNS headaches, no technical setup.
+          </p>
+          <div class="cloudjet-domain-setup-card-example">
+            Instant connection
+          </div>
+        </div>
+      </div>
+
+      <div class="cloudjet-domain-setup-panel">
+        <div class="benefits-section">
+          <h3 class="cloudjet-domain-setup-panel-title">
+            <div class="cloudjet-domain-setup-panel-icon">✓</div>
+            Why Choose Our Domain Service?
+          </h3>
+          <ul class="cloudjet-domain-setup-benefits">
+            <li class="cloudjet-domain-setup-benefit">
+              <div class="benefit-content">
+                <div class="cloudjet-domain-setup-benefit-title">
+                  Automatic Setup
+                </div>
+                <div class="cloudjet-domain-setup-benefit-description">
+                  No technical knowledge required. We handle all DNS
+                  configurations automatically.
+                </div>
+              </div>
+            </li>
+            <li class="cloudjet-domain-setup-benefit">
+              <div class="benefit-content">
+                <div class="cloudjet-domain-setup-benefit-title">
+                  Instant Connection
+                </div>
+                <div class="cloudjet-domain-setup-benefit-description">
+                  Your domain connects to your website immediately after
+                  purchase.
+                </div>
+              </div>
+            </li>
+            <li class="cloudjet-domain-setup-benefit">
+              <div class="benefit-content">
+                <div class="cloudjet-domain-setup-benefit-title">
+                  Full Support
+                </div>
+                <div class="cloudjet-domain-setup-benefit-description">
+                  Our team is here to help if you need any assistance.
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="steps-section">
+          <h3 class="cloudjet-domain-setup-panel-title">
+            <div class="cloudjet-domain-setup-panel-icon">☰</div>
+            How It Works
+          </h3>
+          <ul class="cloudjet-domain-setup-steps">
+            <li class="cloudjet-domain-setup-step">
+              <div class="cloudjet-domain-setup-step-number">1</div>
+              <div class="cloudjet-domain-setup-step-content">
+                <div class="cloudjet-domain-setup-step-title">
+                  Choose Your Domain
+                </div>
+                <div class="cloudjet-domain-setup-step-description">
+                  Pick a memorable name for your website
+                </div>
+              </div>
+            </li>
+            <li class="cloudjet-domain-setup-step">
+              <div class="cloudjet-domain-setup-step-number">2</div>
+              <div class="cloudjet-domain-setup-step-content">
+                <div class="cloudjet-domain-setup-step-title">
+                  Automatic Registration
+                </div>
+                <div class="cloudjet-domain-setup-step-description">
+                  We redirect you to Cloudjet Store to complete purchase
+                </div>
+              </div>
+            </li>
+            <li class="cloudjet-domain-setup-step">
+              <div class="cloudjet-domain-setup-step-number">3</div>
+              <div class="cloudjet-domain-setup-step-content">
+                <div class="cloudjet-domain-setup-step-title">
+                  AutoLink™ Activation
+                </div>
+                <div class="cloudjet-domain-setup-step-description">
+                  Your domain instantly connects to your website
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cloudjet-domain-setup-buttons">
+        <button
+          class="cloudjet-domain-setup-button cloudjet-domain-setup-button-secondary"
+        >
+          Learn More About Domains
+        </button>
+        <button
+          class="cloudjet-domain-setup-button cloudjet-domain-setup-button-primary"
+        >
+          Got it, Let's Continue
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
